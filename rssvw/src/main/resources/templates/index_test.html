@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/rsstariff.css}">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn_login">Login</button>
+    <button id="btn_price">Price</button>
+    <button id="btn_logout">Logout</button>
+
+    <form id="login_form">
+        <label for="db_user_id" class="input_class">db_user</label>
+        <input type="text" name="db_user" id="db_user_id" class="input_class">
+        <br>
+        <label for="db_passwd_id" class="input_class">password</label>
+        <input type="password" name="db_passwd" id="db_passwd_id" class="input_class">
+        <br>
+        <input type="submit" value="Sign in" id="btn_db_sign_in_id" class="input_class">
+        <button id="btn_login_cancel">Cancel</button>
+        <div id="log_status"></div>
+    </form>
+
+    <form id="price_form">
+        <label id="lbl_rtpl_id" for="rtpl_id" class="input_class">rtpl_id</label>
+        <input type="text" name="rtpl_id" id="rtpl_id" class="input_class">
+        <br>
+        <label for="start_date_id" class="input_class">start_date</label>
+        <input type="date" name="start_date" id="start_date_id" class="input_class" >
+        <br>
+            <input type="radio" name="inp_type" id="radio_rtpl_name_id" class="rtpl_val_tp" value="name" checked>
+            <label for="radio_rtpl_name_id">ТП</label>
+            <input type="radio" name="inp_type" id="radio_tap_code_id" class="rtpl_val_tp" value="tap">
+            <label for="radio_tap_code_id">TAP</label>
+            <input type="radio" name="inp_type" id="radio_rtpl_id" class="rtpl_val_tp" value="id" >
+            <label for="radio_rtpl_id">ID</label>
+        <br>
+        <input type="submit" value="Sign in" id="btn_price_id" class="input_class">
+        <button id="btn_price_cancel_id" class="input_class">Cancel</button>
+        <div id="trf_req_status"></div>
+    </form>
+    <form id="frm-tariff-id">
+        <table id="tbl-tariff-id">
+            <tr>
+                <th id=tbl-price-head colspan="5"></th>
+            </tr>
+            <tr>
+                <th id=tbl-price-th-name>Наименование</th>
+                <th id=tbl-price-th-tariff>Тариф,USD</th>
+                <th id=tbl-price-th-rndt>Округление</th>
+                <th id=tbl-price-th-start_date>Дата начало</th>
+                <th id=tbl-price-th-end_date>Дата окончания</th>
+            </tr>
+        </table>
+        <br>
+        <button type="submit" id="btn-frm-tariff-close">Close</button>
+    </form>
+    <script type="text/javascript" th:src="@{/js/rssprice.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+#login_form {
+    display: none;
+    margin: 20px auto;
+    width: 300px;
+    border: 1px solid #c0c0c0;
+    border-radius: 10px;
+}
+#price_form {
+    display: none;
+    margin: 20px auto;
+    width: 300px;
+    border: 1px solid #c0c0c0;
+    border-radius: 10px;
+}
+#tbl-tariff-id {
+    /* display: none; */
+    margin: 20px auto;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #c0c0c0;   
+}
+#tbl-price-th-name,#tbl-price-th-rndt {
+    width:30%;
+    text-align: start;
+    border:1px solid #c0c0c0;
+}
+#tbl-price-th-date {
+    width: 10%;
+    text-align: start;
+    border:1px solid #c0c0c0;
+}
+#tbl-price-th-tariff,#tbl-price-th-date {
+    width: 15%;
+    text-align: start;
+    border:1px solid #c0c0c0;
+}
+.tbl-price-th {
+    text-align: start;
+    border:1px solid #c0c0c0;
+}
+#frm-tariff-id {
+    display: none;
+    margin: 0px auto;
+    width: 100%;
+    border: 1px solid #c0c0c0;
+}
+.input_class {
+    margin: 5px;
+}
+
+.rtpl_val_tp {
+    margin: 5px;
+}

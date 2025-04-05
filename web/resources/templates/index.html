@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.tymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">-->
+    <!--    <link th:href="@{/css/bootstrap-icons.css}" rel="stylesheet">-->
+    <!--    <link th:href="@{/css/main.css}" rel="stylesheet">-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-icons.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/reports.css" rel="stylesheet">
+    <title>Система поддержки роуминга МегаФон</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand" href="#"><img th:src="@{/img/megafon30.png}" height="30"></a> -->
+            <a class="navbar-brand" href="#">RSS </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Переключатель навигации">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="link-tariffy" class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal"
+                            data-bs-target="#tariffParamModal">Тарифы</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Отчеты
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="setForm('Form2')" href="#">Детализация</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="setForm('Form1')">Статистика по
+                                    Рап-файлам</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <!-- <li><a class="dropdown-item" href="#">Счета</a></li>-->
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><i
+                                class="bi bi-person-fill"></i><span id="navbar-user"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!-- <a id="link-logIn" class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#logInModal">
+                                    Вход
+                                </a> -->
+                                <a id="link-logIn" class="dropdown-item" href="#">
+                                    Вход
+                                </a>
+                            </li>
+                            <li>
+                                <a id="link-logOut" class="dropdown-item" href="#">Выход</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="alertPlaceholder" class="row g-3"></div>
+    <form class="row g-3" action="#">
+        <div class="modal fade" id="logInModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="logInModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-bg-secondary p-3">
+                        <h1 class="modal-title fs-5" id="logInModalLabel">Авторизация </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div id="logInBody" class="modal-body">
+                        <div class="row mb-3" id="statusBar"></div>
+                        <div class="row mb-3">
+                            <label for="inputLogIn" class="col-sm-2 col-form-label">Имя</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputLogIn">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Пароль</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputPassword">
+                            </div>
+                        </div>
+                        <div class="row mb-3 d-none">
+                            <label for="inputNewPassword" class="col-sm-2 col-form-labeln">Новый пароль</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="inputNewPassword">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="flagNewPassword">
+                            <label class="form-check-label" for="flagNewPassword">
+                                сменить пароль
+                            </label>
+                        </div>
+                        <!-- <div class="row mb-3">
+                            <label for="flagNewPassword" class="col-sm-2 col-form-labeln">Новый пароль</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="flagNewPassword">
+                            </div>
+                        </div> -->
+                        <button type="submit" id="btn-logIn" class="btn btn-primary">Войти</button>
+                        <!-- <button type="button" id="btn-changelogIn" class="btn btn-primary">Изменить пароль</button> -->
+                        <button type="button" id="btn-logIn-cancel" class="btn btn-danger"
+                            data-bs-dismiss="modal">Отмена</button>
+                        <!-- <button type="submit" id="btn-logIn" class="btn btn-primary" data-bs-dismiss="modal">Войти</button> -->
+                        <!-- <button type="button" id="btn-logIn" class="btn btn-primary" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Войти
+                    </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form class="row g-3" action="#">
+        <div class="modal fade" id="tariffParamModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="tariffParamModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-bg-secondary p-3">
+                        <h1 class="modal-title fs-5" id="tariffParamModalLabel">Параметры</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label for="tariffParamValue" class="col-sm-4 col-form-label">Тарифный план</label>
+                            <!-- <select class="row mb-3 form-select" aria-label="tariffParamValue">
+                                <option selected>Наименование</option>
+                                <option value="name">Наименование</option>
+                                <option value="tap">TAP</option>
+                              </select> -->
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="tariffParamValue">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="tariffStartDate" class="col-sm-4 col-form-label">Дата</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="tariffStartDate">
+                            </div>
+                        </div>
+                        <button type="submit" id="btn-sendTariffParam" class="btn btn-primary"
+                            data-bs-dismiss="modal">Показать</button>
+                        <button type="button" id="btn-cancelTariffParam" class="btn btn-danger"
+                            data-bs-dismiss="modal">Отмена</button>
+                    </div>
+                    <!--                    <div id="statusBar"></div>-->
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="tariffDataModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="tariffDataModaModal" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen ">
+            <div class="modal-content">
+                <div class="modal-header text-bg-secondary p-3">
+                    <h1 class="modal-title fs-5" id="tariffDataModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body table-responsive">
+                    <div class="row mb-3">
+                        <table id="tableTariffData" class="table table-bordered table-sm">
+                            <tr>
+                                <th>Наименование</th>
+                                <th>Тариф,USD</th>
+                                <th>Округление</th>
+                                <th>Дата начало</th>
+                                <th>Дата окончания</th>
+                            </tr>
+                            <tbody id="tbodyTariffData">
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" id="btn-closeTariffData" class="btn btn-primary"
+                        data-bs-dismiss="modal">Закрыть</button>
+                </div>
+                <!--                <div id="statusBar"></div>-->
+            </div>
+        </div>
+    </div>
+
+    <!----------REPORTS-------->
+    <div class="main_block" id="main_block">
+        <!----------------------------------------- FORM_1 ---------------------------------------------->
+        <!---Report RAP -->
+        <form id="Form1" name="Form1" class="form_1">
+
+            <fieldset id="fsForm1">
+
+                <div class="params_in">
+                    <center class="title"> Входные параметры</center>
+                    <div>
+                        <input type="text" placeholder="VPMN" id="in_vpmnForm1">
+                        <input type="text" placeholder="HPMN" id="in_hpmnForm1">
+                    </div>
+                    <div style="  margin-top:10px;"> Дата вставки ТАП <br>
+                        <input type="date" placeholder="С" id="in_navidatefromForm1">
+                        <input type="date" placeholder="ПО" id="in_navidatetoForm1">
+                    </div>
+                    <div style="margin-top:10px;  "> Диапазон ТАП-файлов
+                        <input type="text" placeholder="С" id="in_seqfromForm1">
+                        <input type="text" placeholder="ПО" id="in_seqtoForm1">
+                    </div>
+                </div>
+
+                <div class="params_out">
+                    <center class="title"> Выходные параметры</center>
+                    <div>
+                        <input type="checkbox" id="out_tapForm1" checked> ТАП-файлы<br>
+                        <input type="checkbox" id="out_rapForm1" checked> RAP-файл<br>
+                        <input type="checkbox" id="out_chargeForm1" checked> Сумма, SDR<br>
+                        <input type="checkbox" id="out_taxForm1" checked> Налог, SDR<br>
+                    </div>
+                </div>
+                </br></br> <input type="button" value="Сформировать" onclick="getRap()">
+            </fieldset>
+
+        </form>
+
+        <!------------------------------------ FORM_2 -------------------------------------------->
+        <!--  Report Details -->
+        <form id="Form2" name="Form2" class="form_2">
+            <fieldset id="fsForm2">
+                <div class="params_in">
+                    <center class="title"> Входные параметры</center>
+                    <div>
+                        <input type="text" placeholder="IMSI" id="in_imsiForm2" name="in_imsiForm2">
+                        <input type="text" placeholder="VPMN" id="in_vpmnForm2" name="in_vpmnForm2" onchange="  if ( (this.value).toUpperCase()!= 'RUSNW') { document.getElementById('in_branchForm2').setAttribute('disabled','disabled');}
+                           else { document.getElementById('in_branchForm2').removeAttribute('disabled'); }    ">
+                        <input type="text" placeholder="HPMN" id="in_hpmnForm2" name="in_hpmnForm2">
+                    </div>
+
+                    <div style="  margin-top:10px;"> Время услуги
+                        <input type="date" placeholder="С" id="in_starttimefromForm2" name="in_starttimefromForm2">
+                        <input type="date" placeholder="ПО" id="in_starttimetoForm2" name="in_starttimetoForm2">
+                    </div>
+                    <div style="  margin-top:10px;">
+                        <input type="text" placeholder="MSC" id="in_mscForm2" name="in_mscForm2">
+                        <select name="in_branchForm2" id="in_branchForm2">
+                            <option value="all" selected disabled>Филиал</option>
+                            <option value="xxx">все филиалы МФ</option>
+                            <option value="rusm0">RUSM0</option>
+                            <option value="rusm2">RUSM2</option>
+                            <option value="rusm3">RUSM3</option>
+                            <option value="rusm4">RUSM4</option>
+                            <option value="rusm6">RUSM6</option>
+                            <option value="rusm7">RUSM7</option>
+                            <option value="rusm8">RUSM8</option>
+                            <option value="rusnw">RUSNW</option>
+                        </select>
+                    </div>
+
+                    <div style=" border:solid 1px grey;  margin-top:10px; width:300px;"> Услуга</br></br>
+                        <input type="checkbox" checked id="in_srlsGPRSForm2" name="in_srlsGPRSForm2"> GPRS<br>
+                        <input type="checkbox" checked id="in_srlsMOCForm2" name="in_srlsMOCForm2">Исходящий Голос<br>
+                        <input type="checkbox" checked id="in_srlsMTCForm2" name="in_srlsMTCForm2">Входящий Голос<br>
+                        <input type="checkbox" checked id="in_srlsSMSForm2" name="in_srlsSMSForm2">СМС<br>
+                        <input type="checkbox" checked id="in_srlsT12Form2" name="in_srlsT12Form2">Экстренные службы
+                    </div>
+                    <div style="   margin-top:10px;  "> Диапазон файлов
+                        <input type="text" placeholder="С" id="in_seqfromForm2" name="in_seqfromForm2">
+                        <input type="text" placeholder="ПО" id="in_seqtoForm2" name="in_seqtoForm2">
+                    </div>
+                </div>
+
+
+
+
+                <div class="params_out">
+                    <center class="title"> Выходные параметры</center>
+                    <div>
+                        <input type="checkbox" checked id="out_imsiForm2"> ИМСИ<br>
+                        <input type="checkbox" checked id="out_calltypeForm2"> Услуга<br>
+                        <input type="checkbox" checked id="out_cltpForm2"> CLTP<br>
+                        <input type="checkbox" checked id="out_servicecodeForm2"> ServiceCode<br>
+                        <input type="checkbox" checked id="out_starttimeForm2"> Время вызова<br>
+                        <input type="checkbox" checked id="out_filenameForm2"> Тап-Файл<br>
+                        <input type="checkbox" checked id="out_chargeForm2"> Charge, SDR<br>
+                        <input type="checkbox" id="out_taxForm2"> Tax, SDR<br>
+                        <input type="checkbox" checked id="out_durationForm2"> Длительность, сек<br>
+                        <input type="checkbox" checked id="out_datavolumeForm2"> Объем ПД, бт<br>
+                        <input type="checkbox" checked id="out_destinationForm2"> А-номер/Б-номер<br>
+                        <input type="checkbox" checked id="out_dialledForm2"> Набранный номер<br>
+                        <input type="checkbox" id="out_mscForm2"> Коммутатор<br>
+                        <input type="checkbox" id="out_ctl1Form2"> CTL1<br>
+                        <input type="checkbox" id="out_udfForm2"> Филиал<br>
+                        <input type="checkbox" id="out_lacForm2"> LAC<br>
+                    </div>
+                </div>
+                </br></br> <input type="button" value="Сформировать" id="submitForm2" onclick="getDetails()">
+            </fieldset>
+        </form>
+        <!----------------------------------------- FORM_3 ---------------------------------------------->
+        <!--  Report Regions -->
+        <form th:method="POST" th:action="@{/reports/regions}" id="Form3" name="Form3" class="form_3" target="_blank">
+            <div class="params_in">
+                <center class="title"> Входные параметры</center>
+                <div>
+                    <input type="text" placeholder="VPMN визитного абонента" id="vpmnForm3" name="in_vpmn">
+                </div>
+                <div style="margin-top:10px;"> Период
+                    <input type="text" placeholder="С" name="in_monthfrom">
+                    <input type="text" placeholder="ПО" name="in_monthto">
+                </div>
+            </div>
+            <div class="params_out">
+                <center class="title"> Выходные параметры</center>
+                <div>
+                    <input type="checkbox" name="out_gprsForm3" id="out_gprsForm3"> GPRS
+                    <select name="gprsVolume" id="gprsVolume">
+                        <option value="0" selected disabled>объем услуги</option>
+                        <option value="1048576">Mb</option>
+                        <option value="1">bt</option>
+                        <option value="1024">kb</option>
+                    </select>
+                    <select name="gprsRndt" id="gprsRndt">
+                        <option value="0" selected disabled>интервал тарификации</option>
+                        <option value="1">bt</option>
+                        <option value="1024">kb</option>
+                        <option value="10240">10 kb</option>
+                        <option value="102400">100 kb</option>
+                        <option value="153600">150 kb</option>
+                    </select> <br>
+                    <input type="checkbox" name="out_voiceForm3" id="out_voiceForm3">MOC/MTC
+                    <select name="voiceVolume" id="voiceVolume">
+                        <option value="0" selected disabled>объем услуги</option>
+                        <option value="1">сек</option>
+                        <option value="60">мин</option>
+                    </select>
+                    <select name="voiceRndt" id="voiceRndt">
+                        <option value="0" selected disabled>интервал тарификации</option>
+                        <option value="1">сек</option>
+                        <option value="60">мин</option>
+                    </select> <br>
+                    <input type="checkbox" checked name="out_smsForm3" id="out_smsForm3">SMS
+                </div>
+            </div>
+            <br><br> <input type="button" value="Сформировать" onclick="getRegions()">
+        </form>
+        <span id="errMsg"></span>
+    </div>
+    <!------------END REPORTS---------------->
+
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/js/rssvw.js"></script>
+    <script type="text/javascript" src="/js/reports.js"></script>
+</body>
+
+</html>

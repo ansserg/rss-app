@@ -1,0 +1,17 @@
+    .main_block {display:inline-block; width:100%; }
+
+   /* .params_in { border:1px solid green;  width:50%;  display:inline-block;  padding-left:20px; margin-top:50px;}
+    .params_out { border-left:1px solid grey; padding-left:20px;   display:inline-block;   margin-top:50px;}
+	*/
+    .title {font-size:30pt; margin-bottom:10px;}
+
+    .form_1, .form_2, .form_3 {  display:none;  margin-top:70px; }
+
+    .errMsgW {text-align:center;   margin:10px 0 10px 0;  color:red}
+    .errMsgI {text-align:center; vertical-align:middle;  padding:50px 100px 50px 100px;   margin:0 0 0 45%;   background-color:#F8F8F8;
+               border-radius:10px;}
+    
+	.outer-wrapper {  display:table; width:100%; /* margin-top:70px;*/ }
+	.param_data, .param_data_right {   display:table-cell;  width:49%; padding-left:20px;}
+	.param_data_right {   border-left:solid 1px grey;}
+	.param_comments {padding:10px 0 10px 20px; width:100%; text-align:justify;  }
