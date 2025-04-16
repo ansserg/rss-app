@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="rssmb" />
+        <module name="api-gw" />
+        <module name="ocsdb" />
+        <module name="rssvw" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gw" options="-parameters" />
+      <module name="ocsdb" options="-parameters" />
+      <module name="rssmb" options="-parameters" />
+      <module name="rssvw" options="-parameters" />
+    </option>
+  </component>
+</project>
