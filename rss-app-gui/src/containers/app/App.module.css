@@ -1,0 +1,13 @@
+.content {
+    margin: '5px 0px 0';
+    overflow: 'initial';
+    borderRadius: borderRadiusLG;
+}
+
+.rssbacgr {
+    background: rgb(76, 196, 140);
+    color: aliceblue;
+}
+.rssbacgrfuter {
+    background:cadetblue;
+}

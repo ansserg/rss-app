@@ -1,0 +1,8 @@
+{
+  "realm": "megafon-rss",
+  "auth-server-url": "http://msk-rss-appb2:8180/",
+  "ssl-required": "external",
+  "resource": "rss-dmf-app",
+  "public-client": true,
+  "confidential-port": 0
+}
